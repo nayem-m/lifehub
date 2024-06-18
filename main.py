@@ -3,10 +3,7 @@ LifeHub, an app to organize your life
 Life areas managing app inspired by the PARA method
 Based on a relational database that links all areas of life
 
-By Moosa Nayem     ID:23026224
-Northumbria University
-Programming KV4012
-Assignment 4
+By Moosa Nayem    
 '''
 
 from flask import Flask, request, render_template, redirect, url_for, flash
