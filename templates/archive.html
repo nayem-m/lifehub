@@ -1,0 +1,40 @@
+{% extends "main.html"%}
+{% block title%}Archives Page{% endblock%}
+{% block content %}
+<body>
+<div class="container mx-auto py-4">
+<h1>Archives</h1>
+    <h2>Areas</h2>
+    {% for area in archived_areas %}
+    <div class="border rounded p-4 mb-4">
+        <h5>{{ area.title }}</h5>
+        <form method="POST" action="{{ url_for('unarchive_area', area_id=area.id) }}" style="display:inline;">
+            <button type="submit" class="btn btn-outline-danger">Unarchive</button>
+        </form>
+    </div>
+    {% endfor %}
+    <hr></hr>
+    <h2>Projects</h2>
+    {% for project in archived_projects %}
+    <div class="border rounded p-4 mb-4">
+        <h5>{{ project.title }}</h5>
+        <form method="POST" action="{{ url_for('unarchive_project', project_id=project.id) }}" style="display:inline;">
+            <button type="submit" class="btn btn-outline-danger">Unarchive</button>
+        </form>
+    </div>
+    {% endfor %}
+    <hr></hr>
+    <h2>Tasks</h2>
+    {% for task in archived_tasks %}
+    <div class="border rounded p-4 mb-4">
+        <h5>{{ task.title }}</h5>
+          <form method="POST" action="{{ url_for('unarchive_task', task_id=task.id) }}" style="display:inline;">
+            <button type="submit" class="btn btn-outline-danger">Unarchive</button>
+        </form>
+    </div>
+    {% endfor %}
+    <hr></hr>
+
+</div>
+</body>
+{% endblock %}

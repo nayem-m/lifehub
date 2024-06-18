@@ -1,0 +1,55 @@
+{% extends "main.html"%}
+{% block title%}Edit Task{% endblock%}
+{% block content %}
+<body>
+<div class="container mx-auto py-4">
+    <h1>Edit Task</h1>
+    <form method="POST" action="{{ url_for('edit_task', task_id=task.id) }}">
+
+
+        <label for="due">Due Date:</label>
+        <input type="date" id="due" name="due" value="{{ task.due_date }}">
+
+
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" id="title" name="title" type="text" value="{{ task.title }}" required>
+
+        <div class="mb-3">
+         <label class="form-label" for="content">Content:</label>
+        <textarea class="form-control" id="content" name="content">{{ task.content }}</textarea>
+      </div>
+
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="area">Area</label>
+          <select class="form-select" id="area" name="area">
+              <option selected>{{ task.area.title }}</option>
+            {% for area in areas %}
+            <option value="{{ area.id }}">{{ area.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+
+      <div class="input-group mb-3">
+          <label class="input-group-text" for="project">Project</label>
+          <select class="form-select" id="project" name="project">
+              <option selected>{{ task.project.title }}</option>
+            {% for project in projects %}
+            <option value="{{ project.id }}">{{ project.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+
+        <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="archive" name="archive" {% if task.archive %}checked{% endif %}>
+  <label class="form-check-label" for="archive">Archive</label>
+</div>
+
+
+        <button type="submit">Update Task</button>
+    </form>
+    <a href="{{ url_for('tasks') }}">Back to Task List</a>
+</div>
+</body>
+{% endblock %}

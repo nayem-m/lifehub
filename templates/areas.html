@@ -1,0 +1,50 @@
+{% extends "main.html"%}
+{% block title%}Add Area{% endblock%}
+{% block content %}
+<body>
+  <div class="container mx-auto py-4">
+    <h1 class="text-2xl font-bold mb-4">Add Areas</h1>
+
+    <form method="POST" action="/areas">
+
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" id="title" name="title" type="text" placeholder="Enter Title" aria-label="default input example">
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="archive" name="archive">
+             <label class="form-check-label" for="archive">Archive</label>
+        </div>
+
+      <div class="mx-auto p-2" style="width: 200px;">
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-primary" type="submit">Add Area</button>
+      </div>
+      </div>
+
+
+    </form>
+    {% for area in areas%}
+    <div class="border rounded p-4 mb-4">
+      <h2 class="text-lg font-bold">{{ area.title }}</h2>
+        <h4>Projects:</h4>
+        {% for project in area.projects %}
+            <h5>{{ project.title }}</h5>
+            <hr></hr>
+        {% endfor %}
+        <br></br>
+        <h4>Tasks:</h4>
+        {% for task in area.tasks%}
+            <h5>{{ task.title }}</h5>
+            <p>Due: {{ task.due_date }}</p>
+            <p>{{ task.content }}</p>
+            <hr></hr>
+        {% endfor %}
+        <a href="{{ url_for('edit_area', area_id=area.id) }}" class="btn btn-primary">Edit</a>
+        <form method="POST" action="{{ url_for('delete_area', area_id=area.id) }}" style="display:inline;">
+       <button type="submit" class="btn btn-outline-danger">Delete</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+{% endblock %}

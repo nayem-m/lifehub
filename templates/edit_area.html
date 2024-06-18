@@ -1,0 +1,24 @@
+{% extends "main.html"%}
+{% block title%}Edit Area{% endblock%}
+{% block content %}
+<body>
+<div class="container mx-auto py-4">
+    <h1>Edit Area</h1>
+    <form method="POST" action="{{ url_for('edit_area', area_id=area.id) }}">
+
+
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" id="title" name="title" type="text" value="{{ area.title }}" required>
+
+        <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="archive" name="archive" {% if area.archive %}checked{% endif %}>
+  <label class="form-check-label" for="archive">Archive</label>
+</div>
+
+
+        <button type="submit">Update Area</button>
+    </form>
+    <a href="{{ url_for('areas') }}">Back to Area List</a>
+</div>
+</body>
+{% endblock %}

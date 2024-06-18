@@ -1,0 +1,35 @@
+{% extends "main.html"%}
+{% block title%}Edit Project{% endblock%}
+{% block content %}
+{% block body %}{% endblock %}
+<body>
+<div class="container mx-auto py-4">
+    <h1>Edit Project</h1>
+    <form method="POST" action="{{ url_for('edit_project', project_id=project.id) }}">
+
+
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" id="title" name="title" type="text" value="{{ project.title }}" required>
+
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="area">Area</label>
+          <select class="form-select" id="area" name="area">
+              <option selected>{{ project.area.title }}</option>
+            {% for area in areas %}
+            <option value="{{ area.id }}">{% if area.title != project.area.title %} {{ area.title }} {% endif %}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="archive" name="archive" {% if project.archive %}checked{% endif %}>
+  <label class="form-check-label" for="archive">Archive</label>
+</div>
+
+
+        <button type="submit">Update Project</button>
+    </form>
+    <a href="{{ url_for('projects') }}">Back to Projects List</a>
+</div>
+</body>
+{% endblock %}
